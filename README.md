@@ -4,7 +4,7 @@ Odin is a general-purpose programming language with distinct typing, built for h
 
 Website: [https://odin-lang.org/](https://odin-lang.org/)
 
-This repository holds assets used by [https://github.com/odin-lang/Odin](Odin's) CI tests.
+This repository holds assets used by [Odin's](https://github.com/odin-lang/Odin) CI tests.
 
 # License
 
@@ -22,7 +22,7 @@ purpose and without fee is hereby granted.
 
 ## Unicode.xml
 
-Downloaded from [https://www.w3.org/2003/entities/2007xml/unicode.xml](unicode.xml).
+Downloaded from [unicode.xml](https://www.w3.org/2003/entities/2007xml/unicode.xml).
 Copyright David Carlisle 1999-2015.
 
 Use and distribution of this code are permitted under the terms of the
