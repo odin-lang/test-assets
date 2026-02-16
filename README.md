@@ -40,3 +40,9 @@ Copyright David Carlisle 1999-2015.
 Use and distribution of this code are permitted under the terms of the
 W3C Software Notice and License.
 http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231.html
+
+## Wycheproof test vectors
+
+Mirrored from [Wycheproof](https://github.com/C2SP/wycheproof/tree/main/testvectors_v1)
+
+Available under the [Apache](Wycheproof/LICENSE) license.
