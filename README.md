@@ -46,3 +46,11 @@ http://www.w3.org/Consortium/Legal/2002/copyright-software-20021231.html
 Mirrored from [Wycheproof](https://github.com/C2SP/wycheproof/tree/main/testvectors_v1)
 
 Available under the [Apache](Wycheproof/LICENSE) license.
+
+## Noise Protocol Framework
+
+Downloaded from:
+
+- [cacophony](https://github.com/haskell-cryptography/cacophony/blob/master/vectors/cacophony.txt) available under the [Unlicense](Noise/LICENSE-cacophony.txt) license.
+- [noise-c](https://github.com/rweather/noise-c/blob/master/tests/vector/noise-c-basic.txt) available under the [MIT](Noise/LICENSE-noise-c.txt) license.
+- [snow](https://github.com/mcginty/snow/blob/main/tests/vectors/snow.txt) available under the [Apache](Noise/LICENSE-APACHE-snow.txt) [MIT](Noise/LICENSE-MIT-snow.txt) license.
