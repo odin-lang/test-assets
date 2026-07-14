@@ -54,3 +54,9 @@ Downloaded from:
 - [cacophony](https://github.com/haskell-cryptography/cacophony/blob/master/vectors/cacophony.txt) available under the [Unlicense](Noise/LICENSE-cacophony.txt) license.
 - [noise-c](https://github.com/rweather/noise-c/blob/master/tests/vector/noise-c-basic.txt) available under the [MIT](Noise/LICENSE-noise-c.txt) license.
 - [snow](https://github.com/mcginty/snow/blob/main/tests/vectors/snow.txt) available under the [Apache](Noise/LICENSE-APACHE-snow.txt) [MIT](Noise/LICENSE-MIT-snow.txt) license.
+
+## x509-limbo
+
+Mirrored from [x509-limbo](https://github.com/C2SP/x509-limbo).
+
+Available under the [Apache](X509-Limbo/LICENSE) license.
