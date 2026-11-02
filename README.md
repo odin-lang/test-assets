@@ -32,6 +32,15 @@ The [BMP Suite](https://entropymine.com/jason/bmpsuite/bmpsuite/html/bmpsuite.ht
 The files with embedded ICC profiles aren't part of Odin's test assets. We don't support BMP metadata.
 We don't support all "possibly correct" images, and thus only ship a subset of these from the BMP Suite.
 
+## BNG
+
+PNG sources and their [BNG](https://bngformat.org) encodings, made with the Unlicensed reference encoder from bngformat.org, with thanks.
+The images are a subset of the BNG benchmark set and remain under their own licenses:
+
+- `tango-*`: [Tango Icon Library](https://github.com/nigeltao/tango-icon-library-pngs), public domain ([license](BNG/LICENSE-tango.txt)).
+- `tecnick-*`: [Tecnick test images](http://www.tecnick.com/public/code/cp_dpage.php?aiocp_dp=testimages), available under the [CC BY-NC-SA 3.0](BNG/LICENSE-tecnick.txt) license.
+- `pngimg-*`: [pngimg.com](https://pngimg.com), available under the [CC BY-NC 4.0](BNG/LICENSE-pngimg.txt) license.
+
 ## Unicode.xml
 
 Downloaded from [unicode.xml](https://www.w3.org/2003/entities/2007xml/unicode.xml).
