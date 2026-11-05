@@ -151,6 +151,10 @@
 | `ll-p8-gray.ref.pgm` | 29×23, PGM reference, maxval 255 |
 | `ll-p8-psv1.jpg` | 29×23, lossless, 8-bit, 3 components, sampling 1x1 1x1 1x1, predictor 1, Adobe transform 0 |
 | `ll-p8-psv1.ref.ppm` | 29×23, PPM reference, maxval 255 |
+| `ll-py-cmyk12.jpg` | 33×21, lossless, 12-bit, 4 components, sampling 1x1 1x1 1x1 1x1, predictor 7, restart interval 99, Adobe transform 0 |
+| `ll-py-cmyk12.ref.pam` | 33×21, PAM reference, maxval 4095, CMYK |
+| `ll-py-cmyk8.jpg` | 31×22, lossless, 8-bit, 4 components, sampling 1x1 1x1 1x1 1x1, predictor 4, Adobe transform 0 |
+| `ll-py-cmyk8.ref.pam` | 31×22, PAM reference, maxval 255, CMYK |
 | `ll-py-ga16.jpg` | 27×19, lossless, 16-bit, gray + alpha, sampling 1x1 1x1, predictor 1 |
 | `ll-py-ga16.ref.pam` | 27×19, PAM reference, maxval 65535, GRAYSCALE_ALPHA |
 | `ll-py-ga8.jpg` | 27×19, lossless, 8-bit, gray + alpha, sampling 1x1 1x1, predictor 2, point transform 2, restart interval 108 |
@@ -160,6 +164,10 @@
 | `ll-py-sub-dnl.jpg` | 30×24, lossless, 12-bit, 3 components, sampling 2x2 1x1 1x2, predictor 7, restart interval 30, height via DNL |
 | `ll-py-sub.jpg` | 30×24, lossless, 12-bit, 3 components, sampling 2x2 1x1 1x2, predictor 7, restart interval 30 |
 | `ll-py-sub.ref.ppm` | 30×24, PPM reference, maxval 4095 |
+| `ll-py-ycck12.jpg` | 27×25, lossless, 12-bit, 4 components, sampling 1x1 1x1 1x1 1x1, predictor 6, restart interval 54, Adobe transform 2 |
+| `ll-py-ycck12.ref.pam` | 27×25, PAM reference, maxval 4095, CMYK |
+| `ll-py-ycck8.jpg` | 29×23, lossless, 8-bit, 4 components, sampling 1x1 1x1 1x1 1x1, predictor 1, Adobe transform 2 |
+| `ll-py-ycck8.ref.pam` | 29×23, PAM reference, maxval 255, CMYK |
 | `noise-q100.jpg` | 96×80, lossy baseline, 8-bit, 3 components, sampling 1x1 1x1 1x1, JFIF |
 | `noise-q100.ref.png` | 96×80, PNG reference, 8-bit RGB |
 | `odd-411.jpg` | 129×67, lossy baseline, 8-bit, 3 components, sampling 4x1 1x1 1x1, JFIF |
