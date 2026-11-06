@@ -41,6 +41,12 @@ The images are a subset of the BNG benchmark set and remain under their own lice
 - `tecnick-*`: [Tecnick test images](http://www.tecnick.com/public/code/cp_dpage.php?aiocp_dp=testimages), available under the [CC BY-NC-SA 3.0](BNG/LICENSE-tecnick.txt) license.
 - `pngimg-*`: [pngimg.com](https://pngimg.com), available under the [CC BY-NC 4.0](BNG/LICENSE-pngimg.txt) license.
 
+## Fonts
+
+Static and variable [Noto](https://github.com/notofonts) fonts (Latin/Greek/Cyrillic, Arabic, Devanagari, Thai and Mono) from [notofonts.github.io](https://github.com/notofonts/notofonts.github.io), unmodified apart from `NotoSans-Variable.ttf`, which is `NotoSans[wdth,wght].ttf` renamed.
+
+Available under the [SIL Open Font License 1.1](Fonts/LICENSE.txt).
+
 ## Unicode.xml
 
 Downloaded from [unicode.xml](https://www.w3.org/2003/entities/2007xml/unicode.xml).
