@@ -4,6 +4,7 @@ Each member is one compressed stream for one ZIP compression method, copied verb
 
 - `pkzip-legacy.zip`: Stored (0), Shrunk (1), Reduced with compression factors 1-4 (2-5) and Imploded (6).
 - `deflate.zip`: Deflated (8) and Deflate64 (9).
+- `deflate64_vector_7zip.bin`: a raw Deflate64 stream written by 7-Zip, for `tests/core/compress/test_core_compress_deflate64.odin`.
 
 ## Method suffixes
 

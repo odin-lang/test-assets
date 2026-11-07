@@ -45,6 +45,7 @@ The images are a subset of the BNG benchmark set and remain under their own lice
 
 Compressed streams for ZIP compression methods 0-6, 8 and 9, made with PKZIP 0.80-2.04g for DOS and 7-Zip 26.02, collected into `pkzip-legacy.zip` (methods 0-6) and `deflate.zip` (methods 8 and 9).
 `archives/` holds whole archives for the ZIP container itself, made with PKZIP for DOS, Windows Explorer, 7-Zip, Info-ZIP and macOS `ditto`: encryption (password `ODIN`), ZIP64, data descriptors, self-extractors, split archives, Unicode names, Unix modes and symlinks, and a comment containing fake signatures.
+`deflate64_vector_7zip.bin` is a raw Deflate64 stream written by 7-Zip.
 See [ZIP/README.md](ZIP/README.md) for what each member exercises. The source files are Odin's own license, emblem and compiler bytes, and generated data, available under Odin's zlib license.
 
 ## Fonts
@@ -53,7 +54,11 @@ Static and variable [Noto](https://github.com/notofonts) fonts (Latin/Greek/Cyri
 
 Available under the [SIL Open Font License 1.1](Fonts/LICENSE.txt).
 
-## Unicode.xml
+## XML
+
+`attribute-whitespace.xml`, `entities.html` and `utf8.xml` were written for Odin's `core:encoding/xml` tests, available under Odin's zlib license.
+
+### Unicode.xml
 
 Downloaded from [unicode.xml](https://www.w3.org/2003/entities/2007xml/unicode.xml).
 Copyright David Carlisle 1999-2015.
@@ -81,3 +86,17 @@ Downloaded from:
 Mirrored from [x509-limbo](https://github.com/C2SP/x509-limbo).
 
 Available under the [Apache](X509-Limbo/LICENSE) license.
+
+## HXA
+
+`teapot.hxa`, a model in Eskil Steenberg's HxA format, for Odin's `core:encoding/hxa` tests.
+
+## I18N
+
+Translation catalogs (gettext `.po`/`.pot`/`.mo`, Qt `.ts`, XLIFF 1.2 and 2.0) written for Odin's `core:text/i18n` tests, available under Odin's zlib license.
+
+## UCD
+
+`UnicodeData.txt` and `PropList.txt` from the [Unicode Character Database](https://www.unicode.org/Public/UCD/latest/ucd/), used to generate `core:unicode`'s tables.
+
+Available under the [Unicode License v3](UCD/license.txt).
