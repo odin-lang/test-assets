@@ -41,6 +41,12 @@ The images are a subset of the BNG benchmark set and remain under their own lice
 - `tecnick-*`: [Tecnick test images](http://www.tecnick.com/public/code/cp_dpage.php?aiocp_dp=testimages), available under the [CC BY-NC-SA 3.0](BNG/LICENSE-tecnick.txt) license.
 - `pngimg-*`: [pngimg.com](https://pngimg.com), available under the [CC BY-NC 4.0](BNG/LICENSE-pngimg.txt) license.
 
+## ZIP
+
+Compressed streams for ZIP compression methods 0-6, 8 and 9, made with PKZIP 0.80-2.04g for DOS and 7-Zip 26.02, collected into `pkzip-legacy.zip` (methods 0-6) and `deflate.zip` (methods 8 and 9).
+`archives/` holds whole archives for the ZIP container itself, made with PKZIP for DOS, Windows Explorer, 7-Zip, Info-ZIP and macOS `ditto`: encryption (password `ODIN`), ZIP64, data descriptors, self-extractors, split archives, Unicode names, Unix modes and symlinks, and a comment containing fake signatures.
+See [ZIP/README.md](ZIP/README.md) for what each member exercises. The source files are Odin's own license, emblem and compiler bytes, and generated data, available under Odin's zlib license.
+
 ## Fonts
 
 Static and variable [Noto](https://github.com/notofonts) fonts (Latin/Greek/Cyrillic, Arabic, Devanagari, Thai and Mono) from [notofonts.github.io](https://github.com/notofonts/notofonts.github.io), unmodified apart from `NotoSans-Variable.ttf`, which is `NotoSans[wdth,wght].ttf` renamed.
