@@ -44,9 +44,28 @@ The images are a subset of the BNG benchmark set and remain under their own lice
 ## ZIP
 
 Compressed streams for ZIP compression methods 0-6, 8 and 9, made with PKZIP 0.80-2.04g for DOS and 7-Zip 26.02, collected into `pkzip-legacy.zip` (methods 0-6) and `deflate.zip` (methods 8 and 9).
-`archives/` holds whole archives for the ZIP container itself, made with PKZIP for DOS, Windows Explorer, 7-Zip, Info-ZIP and macOS `ditto`: encryption (password `ODIN`), ZIP64, data descriptors, self-extractors, split archives, Unicode names, Unix modes and symlinks, and a comment containing fake signatures.
+`archives/` holds whole archives for the ZIP container itself, made with PKZIP for DOS, Windows Explorer, PowerShell, 7-Zip, Info-ZIP, libarchive and macOS `ditto`: encryption (password `ODIN`), ZIP64, data descriptors, self-extractors, split archives, XZ (method 95) members with and without BCJ, Unicode names, backslash separators, Unix modes and symlinks, and a comment containing fake signatures.
 `deflate64_vector_7zip.bin` is a raw Deflate64 stream written by 7-Zip.
 See [ZIP/README.md](ZIP/README.md) for what each member exercises. The source files are Odin's own license, emblem and compiler bytes, and generated data, available under Odin's zlib license.
+
+## XZ
+
+`.xz` streams made with XZ Utils 5.8.3 and 7-Zip 26.02: every integrity check, preset, BCJ filter and Delta distance, filter chains, LZMA2 options, multiple blocks and streams, stream padding, oversized dictionaries in the headers, and legacy `.lzma` files.
+See [XZ/README.md](XZ/README.md). The source files are Odin's own license and compiler bytes, and generated data, available under Odin's zlib license.
+
+`XZ/xz-utils/` holds the good, bad and unsupported `.xz` and `.lzma` files from [XZ Utils](https://tukaani.org/xz/) 5.8.3's `tests/files`, unchanged.
+Available under the [BSD Zero Clause License](XZ/xz-utils/COPYING.0BSD), Copyright (C) The XZ Utils authors and contributors.
+
+## 7Z
+
+7z archives made with 7-Zip 26.02 and libarchive: every method and filter, coder chains, solid modes, header options, directories and Unicode names, a multi-volume set, and AES encryption of data and headers (password `ODIN`).
+See [7Z/README.md](7Z/README.md). The source files are the same as for XZ, available under Odin's zlib license.
+
+## TAR
+
+tar archives made with GNU tar 1.35, libarchive's `bsdtar` on Windows and macOS and the macOS `pax`: every format, gzip, bzip2, xz and lzma compression, long names, sparse files, base-256 numbers, labels, incremental dumps and a multi-volume set.
+`hostile-*` and `crafted-*` were written in Python: archives that try to escape the extraction directory or break a reader, and valid but unusual ones.
+See [TAR/README.md](TAR/README.md). The archived files are Odin's own license and generated data, available under Odin's zlib license.
 
 ## Fonts
 

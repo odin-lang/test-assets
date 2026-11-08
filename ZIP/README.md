@@ -17,16 +17,16 @@ All except LICENSE and EMBLEM.ICO were generated with a fixed random seed.
 
 | File | Size | Contents |
 |---|---:|---|
-| LICENSE | 892 | Odin's zlib license text. |
+| BINARY.BIN | 100,000 | The first 100,000 bytes of a Windows build of the Odin compiler. |
+| DLE.BIN | 16,384 | Dense in 0x90, Reduce's DLE escape byte: runs of DLE, DLE followed by 0x00, and DLE mixed with literals and text. |
 | EMBLEM.ICO | 3,638 | Odin's emblem icon. |
+| EMPTY.TXT | 0 | Empty file. |
+| LICENSE | 892 | Odin's zlib license text. |
+| ONE.TXT | 1 | The single byte `A`. |
+| RANDOM.BIN | 100,000 | Random bytes. Incompressible, so every tool stores it. |
+| SAME.BIN | 32,768 | All `A`: long runs, maximum match lengths, and Shrink's KwKwK case. |
 | SMALL.TXT | 250 | Pseudo-random English-like text built from the words of LICENSE. |
 | TEXT.TXT | 80,000 | The same kind of text. Large enough to fill Shrink's 8192-entry table, so it exercises code size increases and partial clears. |
-| BINARY.BIN | 100,000 | The first 100,000 bytes of a Windows build of the Odin compiler. |
-| SAME.BIN | 32,768 | All `A`: long runs, maximum match lengths, and Shrink's KwKwK case. |
-| RANDOM.BIN | 100,000 | Random bytes. Incompressible, so every tool stores it. |
-| DLE.BIN | 16,384 | Dense in 0x90, Reduce's DLE escape byte: runs of DLE, DLE followed by 0x00, and DLE mixed with literals and text. |
-| EMPTY.TXT | 0 | Empty file. |
-| ONE.TXT | 1 | The single byte `A`. |
 
 ## Tools
 
@@ -128,32 +128,51 @@ Whole archives for testing the ZIP container rather than the compression methods
 
 | File | Made with | What it exercises |
 |---|---|---|
-| `archives/pkzip204-comments.zip` | PKZIP 2.04g | Archive comment and per-file comments. |
-| `archives/pkzip204-comment-fake-signatures.zip` | PKZIP 2.04g, `-z < COMMENT.TXT` | The archive comment contains a fake end of central directory signature (`PK\x05\x06`) and a fake central header signature (`PK\x01\x02`). A reader that takes the first `PK\x05\x06` found scanning backwards (e.g. Python's `zipfile`) fails. |
-| `archives/pkzip204-paths.zip` | PKZIP 2.04g, `-rP` | Stored paths with directory entries (DOS directory attribute), including an empty directory. |
-| `archives/pkzip204-sfx.exe` | PKZIP 2.04g, ZIP2EXE | Self-extracting DOS executable: the archive follows the extractor stub. ZIP2EXE rewrites the offsets, so they count from the start of the file. |
-| `archives/pkzip110-sfx.exe` | PKZIP 1.10, ZIP2EXE | Self-extracting DOS executable with an Implode and a Shrink member; offsets count from the start of the file. |
-| `archives/pkzip204-zipcrypto-deflate.zip` | PKZIP 2.04g, `-ex -sODIN` | Traditional PKWARE encryption (ZipCrypto) over Deflate, plus encrypted stored empty and one-byte files. |
-| `archives/pkzip204-zipcrypto-store.zip` | PKZIP 2.04g, `-e0 -sODIN` | ZipCrypto over Store. |
-| `archives/pkzip110-zipcrypto-shrink.zip` | PKZIP 1.10, `-es -sODIN` | ZipCrypto over Shrink. |
-| `archives/pkzip110-zipcrypto-implode.zip` | PKZIP 1.10, `-ex -sODIN` | ZipCrypto over Implode, with both 4k2t and 8k3t members. |
-| `archives/explorer-cp437.zip` | Windows 10 22H2, Send to > Compressed (zipped) folder | CP437 names without the UTF-8 flag, no extra fields, directory entries for every folder, empty and tiny files stored. Explorer refuses to add names outside the OEM code page (Greek, Japanese) instead of writing UTF-8. |
-| `archives/7z-utf8.zip` | 7-Zip 26.02, `-mcu=on` | UTF-8 names with general purpose flag bit 11: accents, Greek, Japanese, an emoji; NTFS timestamp extra field (0x000a). |
-| `archives/7z-zipcrypto.zip` | 7-Zip 26.02, `-mem=ZipCrypto -pODIN` | ZipCrypto over Deflate as written by 7-Zip. |
 | `archives/7z-aes128.zip` | 7-Zip 26.02, `-mem=AES128 -pODIN` | WinZip AES (method 99, extra field 0x9901), 128-bit key, over Deflate. |
 | `archives/7z-aes192-stored.zip` | 7-Zip 26.02, `-mem=AES192 -mm=Copy -pODIN` | WinZip AES, 192-bit key, over Store. |
 | `archives/7z-aes256.zip` | 7-Zip 26.02, `-mem=AES256 -pODIN` | WinZip AES, 256-bit key, over Deflate. |
 | `archives/7z-bzip2.zip` | 7-Zip 26.02, `-mm=BZip2` | BZip2 (method 12). |
+| `archives/7z-deflate64.zip` | 7-Zip 26.02, `7z a -tzip -mm=Deflate64` | Deflate64 (method 9) archive. |
 | `archives/7z-lzma.zip` | 7-Zip 26.02, `-mm=LZMA` | LZMA (method 14) with the end-of-stream marker (flag bit 1). |
 | `archives/7z-ppmd.zip` | 7-Zip 26.02, `-mm=PPMd` | PPMd version I, revision 1 (method 98). |
-| `archives/iz-stream.zip` | Info-ZIP Zip 3.0 (macOS), `zip - files | cat` | Written to a pipe: every entry has zero CRC and sizes in its local header and a data descriptor with signature (flag bit 3). |
-| `archives/iz-stream-zip64.zip` | Info-ZIP Zip 3.0 (macOS), `zip -fz - files | cat` | Streamed and forced ZIP64: data descriptors with 8-byte sizes and ZIP64 extra fields. The end of central directory record gives the central directory offset as `0xFFFFFFFF`, yet there is no ZIP64 end of central directory record or locator, so a reader has to find the central directory from its size instead. |
-| `archives/iz-zip64.zip` | Info-ZIP Zip 3.0 (macOS), `-fz` | ZIP64 extra fields (0x0001) on small files, and ZIP64 end of central directory records. |
+| `archives/7z-store.zip` | 7-Zip 26.02, `7z a -tzip -mm=Copy` | Store (method 0) archive. |
+| `archives/7z-utf8.zip` | 7-Zip 26.02, `-mcu=on` | UTF-8 names with general purpose flag bit 11: accents, Greek, Japanese, an emoji; NTFS timestamp extra field (0x000a). |
+| `archives/7z-xz-code.zip` | 7-Zip 26.02, `-mm=XZ -mf=on` | XZ on x86-64 and ARM64 code. 7-Zip ignores `-mf` for zip, so these are LZMA2 only, like every method 95 archive it writes. |
+| `archives/7z-xz.zip` | 7-Zip 26.02, `-mm=XZ` | XZ (method 95): each member is a whole `.xz` stream with a CRC32 check. 7-Zip stores the members XZ doesn't shrink (one, empty and 250 bytes) with method 0. |
+| `archives/7z-zipcrypto.zip` | 7-Zip 26.02, `-mem=ZipCrypto -pODIN` | ZipCrypto over Deflate as written by 7-Zip. |
+| `archives/ditto-utf8.zip` | macOS `ditto -c -k --sequesterRsrc --keepParent` | NFD UTF-8 names without the UTF-8 flag, plus `__MACOSX/._*` AppleDouble entries. |
+| `archives/ditto.zip` | macOS `ditto -c -k --sequesterRsrc --keepParent` | Finder-style archive: data descriptors, symlinks, extra field 0x5855, and an extended attribute stored as an AppleDouble file under `__MACOSX/`. |
+| `archives/explorer-cp437.zip` | Windows 10 22H2, Send to > Compressed (zipped) folder | CP437 names without the UTF-8 flag, no extra fields, directory entries for every folder, empty and tiny files stored. Explorer refuses to add names outside the OEM code page (Greek, Japanese) instead of writing UTF-8. |
 | `archives/iz-4.5GiB.zip` | Info-ZIP Zip 3.0 (macOS), `-fz` | One 4,831,838,208-byte file of zeros: sizes beyond 32 bits. |
 | `archives/iz-70000-entries.zip` | Info-ZIP Zip 3.0 (macOS), `-r` | 70,001 entries (a directory and 70,000 empty files): more than 65,535 entries, so the entry count needs ZIP64 end of central directory records. |
-| `archives/iz-split.zip` | Info-ZIP Zip 3.0 (macOS), `-0 -s 64k` | Last part of a split archive; the first part is `iz-split.z01`. |
+| `archives/iz-nodirs-9.zip` | Info-ZIP Zip 3.0 (macOS 27.0.1), `zip -r -D -9` | Info-ZIP maximum Deflate, no directory entries. |
 | `archives/iz-split.z01` | Info-ZIP Zip 3.0 (macOS), `-0 -s 64k` | First 64 KiB part of the split archive. |
-| `archives/iz-utf8.zip` | Info-ZIP Zip 3.0 (macOS), `-r`, UTF-8 locale | UTF-8 names in Unicode NFD (decomposed, as macOS returns them) without the UTF-8 flag; Unix extra fields UT (0x5455) and ux (0x7875). |
+| `archives/iz-split.zip` | Info-ZIP Zip 3.0 (macOS), `-0 -s 64k` | Last part of a split archive; the first part is `iz-split.z01`. |
+| `archives/iz-store.zip` | Info-ZIP Zip 3.0 (macOS 27.0.1), `zip -r -y -0` | Info-ZIP Store, with symlinks stored as links. |
+| `archives/iz-stream-zip64.zip` | Info-ZIP Zip 3.0 (macOS), `zip -fz - files | cat` | Streamed and forced ZIP64: data descriptors with 8-byte sizes and ZIP64 extra fields. The end of central directory record gives the central directory offset as `0xFFFFFFFF`, yet there is no ZIP64 end of central directory record or locator, so a reader has to find the central directory from its size instead. |
+| `archives/iz-stream.zip` | Info-ZIP Zip 3.0 (macOS), `zip - files | cat` | Written to a pipe: every entry has zero CRC and sizes in its local header and a data descriptor with signature (flag bit 3). |
 | `archives/iz-unix.zip` | Info-ZIP Zip 3.0 (macOS), `-r -y` | Unix permissions (755, 644, 600), stored symlinks (to a file, to a directory, and one escaping the archive: `../../../etc/passwd`), empty directory. |
-| `archives/ditto.zip` | macOS `ditto -c -k --sequesterRsrc --keepParent` | Finder-style archive: data descriptors, symlinks, extra field 0x5855, and an extended attribute stored as an AppleDouble file under `__MACOSX/`. |
-| `archives/ditto-utf8.zip` | macOS `ditto -c -k --sequesterRsrc --keepParent` | NFD UTF-8 names without the UTF-8 flag, plus `__MACOSX/._*` AppleDouble entries. |
+| `archives/iz-utf8.zip` | Info-ZIP Zip 3.0 (macOS), `-r`, UTF-8 locale | UTF-8 names in Unicode NFD (decomposed, as macOS returns them) without the UTF-8 flag; Unix extra fields UT (0x5455) and ux (0x7875). |
+| `archives/iz-zip64.zip` | Info-ZIP Zip 3.0 (macOS), `-fz` | ZIP64 extra fields (0x0001) on small files, and ZIP64 end of central directory records. |
+| `archives/iz-zipcrypto.zip` | Info-ZIP Zip 3.0 (macOS 27.0.1), `zip -r -y -P ODIN` | Info-ZIP ZipCrypto over Deflate. |
+| `archives/libarchive-mac-aes256.zip` | macOS 27.0.1 bsdtar 3.5.3, `tar --format zip --options zip:encryption=aes256 --passphrase ODIN` | libarchive on macOS: WinZip AES-256. |
+| `archives/libarchive-mac-deflate.zip` | macOS 27.0.1 bsdtar 3.5.3, `tar --format zip` | libarchive's zip writer on macOS: Deflate with data descriptors, NFD UTF-8 names without the UTF-8 flag, symlinks, a hard link. |
+| `archives/libarchive-mac-store.zip` | macOS 27.0.1 bsdtar 3.5.3, `tar --format zip --options zip:compression=store` | libarchive on macOS: Store. |
+| `archives/libarchive-mac-zipcrypto.zip` | macOS 27.0.1 bsdtar 3.5.3, `tar --format zip --options zip:encryption=zipcrypt --passphrase ODIN` | libarchive on macOS: ZipCrypto. |
+| `archives/libarchive-win-aes256.zip` | Windows 10 22H2 bsdtar 3.8.9, `tar --format zip --options zip:encryption=aes256 --passphrase ODIN -cf libarchive-win-aes256.zip tree` | libarchive on Windows: WinZip AES-256 (password `ODIN`). |
+| `archives/libarchive-win-deflate.zip` | Windows 10 22H2 bsdtar 3.8.9, `tar --format zip -cf libarchive-win-deflate.zip tree` | libarchive's zip writer on Windows: Deflate with data descriptors, Unix host and extra fields, names in the OEM code page (CP437) without the UTF-8 flag. |
+| `archives/libarchive-win-store.zip` | Windows 10 22H2 bsdtar 3.8.9, `tar --format zip --options zip:compression=store -cf libarchive-win-store.zip tree` | libarchive on Windows: Store. |
+| `archives/libarchive-win-zipcrypto.zip` | Windows 10 22H2 bsdtar 3.8.9, `tar --format zip --options zip:encryption=zipcrypt --passphrase ODIN -cf libarchive-win-zipcrypto.zip tree` | libarchive on Windows: ZipCrypto (password `ODIN`). |
+| `archives/pkzip110-sfx.exe` | PKZIP 1.10, ZIP2EXE | Self-extracting DOS executable with an Implode and a Shrink member; offsets count from the start of the file. |
+| `archives/pkzip110-zipcrypto-implode.zip` | PKZIP 1.10, `-ex -sODIN` | ZipCrypto over Implode, with both 4k2t and 8k3t members. |
+| `archives/pkzip110-zipcrypto-shrink.zip` | PKZIP 1.10, `-es -sODIN` | ZipCrypto over Shrink. |
+| `archives/pkzip204-comment-fake-signatures.zip` | PKZIP 2.04g, `-z < COMMENT.TXT` | The archive comment contains a fake end of central directory signature (`PK\x05\x06`) and a fake central header signature (`PK\x01\x02`). A reader that takes the first `PK\x05\x06` found scanning backwards (e.g. Python's `zipfile`) fails. |
+| `archives/pkzip204-comments.zip` | PKZIP 2.04g | Archive comment and per-file comments. |
+| `archives/pkzip204-paths.zip` | PKZIP 2.04g, `-rP` | Stored paths with directory entries (DOS directory attribute), including an empty directory. |
+| `archives/pkzip204-sfx.exe` | PKZIP 2.04g, ZIP2EXE | Self-extracting DOS executable: the archive follows the extractor stub. ZIP2EXE rewrites the offsets, so they count from the start of the file. |
+| `archives/pkzip204-zipcrypto-deflate.zip` | PKZIP 2.04g, `-ex -sODIN` | Traditional PKWARE encryption (ZipCrypto) over Deflate, plus encrypted stored empty and one-byte files. |
+| `archives/pkzip204-zipcrypto-store.zip` | PKZIP 2.04g, `-e0 -sODIN` | ZipCrypto over Store. |
+| `archives/powershell51.zip` | Windows PowerShell 5.1, Microsoft.PowerShell.Archive 1.0.1.0, `Compress-Archive -Path tree` | Compress-Archive on .NET Framework: backslashes as path separators, the UTF-8 flag only on non-ASCII names, directory entries only for directories without files, no extra fields. |
+| `archives/pwsh7.zip` | PowerShell 7.6, Microsoft.PowerShell.Archive 1.2.6, `Compress-Archive -Path tree` | Compress-Archive on .NET: forward slashes, otherwise as Windows PowerShell 5.1. |
+| `archives/xz-bcj.zip` | Assembled in Python around `xz --x86`, `xz --arm64` and plain `xz` streams (XZ Utils 5.8.3) | XZ with BCJ filters ahead of LZMA2 in the `.xz` filter chain: x86 and ARM64, plus a plain member, with CRC64 checks. No tool we have writes these, so the container is minimal: no extra fields, version 6.3. |
+| `archives/xz-sha256-multiblock.zip` | Assembled in Python around an `xz --check=sha256 --block-size=16KiB` stream (XZ Utils 5.8.3) | XZ with a SHA-256 check and five blocks in one member. |
