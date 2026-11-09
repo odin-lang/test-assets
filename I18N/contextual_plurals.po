@@ -1,0 +1,27 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: odin-i18n-context-test\n"
+"PO-Revision-Date: 2026-10-31 00:00+0000\n"
+"Last-Translator: Test fixture\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "A"
+msgid "item"
+msgid_plural "items"
+msgstr[0] "A item"
+msgstr[1] "A items"
+
+msgctxt "B"
+msgid "item"
+msgid_plural "items"
+msgstr[0] "B item"
+msgstr[1] "B items"
+
+# Sorted after A/B contextual records in the MO; catches context leaking to the next record.
+msgid "plain"
+msgstr "Plain translation"
