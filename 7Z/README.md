@@ -79,6 +79,15 @@ Made with 7-Zip 26.02 (x64). Sources have their times set to 2026-11-08 12:00:00
 | `volumes.7z.001 .. volumes.7z.003` | TEXT.TXT, RANDOM.BIN, BINARY.BIN | `7z a -v64k` | LZMA2:384k | 1 | + | A multi-volume set of 64 KiB volumes. |
 | `x9.7z` | TEXT.TXT, PROG.EXE, TONE.WAV | `7z a -mx=9` | Delta LZMA2:384k LZMA:384k BCJ2 | 3 | - | Level 9 defaults: BCJ2 with LZMA2 and two `lc0:lp2` LZMA coders for the PE, Delta:4 for the WAV, three folders. |
 
+## Self-extracting
+
+Stubs from Igor Pavlov's public domain LZMA SDK 26.06 (`lzma2606.7z`, `bin/`), joined to archives above with `copy /b`. The archive offset is where the 7z signature header starts.
+
+| File | Command | Archive offset | What it exercises |
+|---|---|---:|---|
+| `sfx-7zS2con.exe` | `copy /b 7zS2con.sfx + lzma2.7z sfx-7zS2con.exe` | 34,816 | `lzma2.7z` behind the SDK's console installer stub. |
+| `sfx-7zSD.exe` | `copy /b 7zSD.sfx + installer\config.txt + tree.7z sfx-7zSD.exe` | 129,165 | `tree.7z` behind the SDK's installer stub and its sample config block. |
+
 ## libarchive
 
 | File | Made with | Command | What it exercises |
